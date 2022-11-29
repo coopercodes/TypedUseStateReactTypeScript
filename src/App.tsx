@@ -1,24 +1,39 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { useState, ChangeEvent } from 'react';
+
+// Type we need for our state
+interface UserInputType {
+  username: string
+  password: string
+}
+
+const initialState = { username: "", password: "" }
 
 function App() {
+  // typed useState
+  const [ userInput, setUserInput ] = useState<UserInputType>(initialState);
+  // Username input, password input -> useState
+
+  // onChange of username -> set the username property equal to the input value
+
+  function setUsername(e : ChangeEvent<HTMLInputElement>) {
+    setUserInput({ ...userInput, username: e.target.value});
+  }
+
+  function setPassword(e : ChangeEvent<HTMLInputElement>) {
+    setUserInput({ ...userInput, password: e.target.value});
+  }
+
+  console.log(userInput);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h3>Username</h3>
+      <input type="text" onChange={(e) => setUsername(e)}></input>
+      <h3>Password</h3>
+      <input type="text" onChange={(e) => setPassword(e)}></input>
     </div>
   );
 }
